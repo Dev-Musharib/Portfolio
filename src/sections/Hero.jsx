@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Briefcase, MessageCircle, Linkedin } from "lucide-react";
 import musharibImg from "../assets/Musharib.jpg";
 import resume from "../assets/Musharib Resume.pdf";
@@ -11,16 +11,42 @@ const Hero = () => {
             className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20"
         >
             {/* Background Elements */}
-            <motion.div
-                animate={{ y: [0, 50, 0], scale: [1, 1.1, 1] }}
-                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute top-20 right-0 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl -z-10"
-            />
-            <motion.div
-                animate={{ y: [0, -50, 0], scale: [1, 1.2, 1] }}
-                transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute bottom-20 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl -z-10"
-            />
+            {(() => {
+                const shouldReduceMotion = useReducedMotion();
+
+                const blobAAnimate = shouldReduceMotion
+                    ? {}
+                    : { y: [0, -18, 0], scale: [1, 1.06, 1] };
+                const blobATransition = shouldReduceMotion
+                    ? {}
+                    : { duration: 6.5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" };
+
+                const blobBAnimate = shouldReduceMotion
+                    ? {}
+                    : { y: [0, 18, 0], scale: [1, 1.05, 1] };
+                const blobBTransition = shouldReduceMotion
+                    ? {}
+                    : { duration: 7.5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut", delay: 0.8 };
+
+                return (
+                    <>
+                        <motion.div
+                            aria-hidden
+                            style={{ pointerEvents: "none" }}
+                            animate={blobAAnimate}
+                            transition={blobATransition}
+                            className="absolute top-20 right-0 w-96 h-96 bg-red rounded-full blur-2xl -z-10"
+                        />
+                        <motion.div
+                            aria-hidden
+                            style={{ pointerEvents: "none" }}
+                            animate={blobBAnimate}
+                            transition={blobBTransition}
+                            className="absolute bottom-20 left-0 w-96 h-96 bg-blue-600/8 rounded-full blur-2xl -z-10"
+                        />
+                    </>
+                );
+            })()}
 
             <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
                 <motion.div
@@ -31,7 +57,7 @@ const Hero = () => {
                     <h2 className="text-cyan-400 font-medium mb-4 text-lg">Hello, I'm</h2>
                     <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
                         <span className="text-white">M.</span>
-                        <span className="text-gradient">Musharib</span>
+                        <span className="text-white">Musharib</span>
                     </h1>
                     <p className="text-slate-400 text-lg mb-8 max-w-lg">
                         Expert developer specializing in <b>WordPress</b>, <b>Shopify</b>, and <b>Dropshipping</b>.
