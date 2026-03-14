@@ -35,7 +35,7 @@ const Hero = () => {
                             style={{ pointerEvents: "none" }}
                             animate={blobAAnimate}
                             transition={blobATransition}
-                            className="absolute top-20 right-0 w-96 h-96 bg-red rounded-full blur-2xl -z-10"
+                            className="absolute top-20 right-0 w-96 h-96 bg-cyan-500/8 rounded-full blur-2xl -z-10"
                         />
                         <motion.div
                             aria-hidden
@@ -57,7 +57,7 @@ const Hero = () => {
                     <h2 className="text-cyan-400 font-medium mb-4 text-lg">Hello, I'm</h2>
                     <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
                         <span className="text-white">M.</span>
-                        <span className="text-white">Musharib</span>
+                        <span className="text-gradient">Musharib</span>
                     </h1>
                     <p className="text-slate-400 text-lg mb-8 max-w-lg">
                         Expert developer specializing in <b>WordPress</b>, <b>Shopify</b>, and <b>Dropshipping</b>.
